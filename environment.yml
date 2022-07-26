@@ -1,0 +1,11 @@
+name: UKB_500K_exome_QC
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=5.1=1_gnu
+  - libgcc-ng=11.2.0=h1234567_1
+  - libgomp=11.2.0=h1234567_1
+  - plink=1.90b6.21=hec16e2b_2
+prefix: /home/craut/miniconda3/envs/UKB_500K_exome_QC
