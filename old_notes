@@ -1,0 +1,242 @@
+
+1. the plink files are not QCed. 
+2. The QC metric information can be retrived from pVCF files.
+3. QC process that others have used (quoted from UKB data showcase reference): 
+ Variant summary & Annotation
+A set of QC metrics were applied to the variants included in Table1. Variants that passed the following criteria are included: individual and variant missingness <10%, Hardy Weinberg Equilibrium p-value>10^-15, minimum read coverage depth of 7 for SNPs and 10 for indels, at least one sample per site passed the allele balance threshold > 0.15 for SNPs and 0.20 for indels. Variants were annotated using SnpEff (Cingolani et al., 2012) based on Ensembl 85 gene model. Transcript aware annotations are derived using protein coding transcripts with defined start and stop coordinates.
+
+(https://www.medrxiv.org/content/10.1101/2020.11.02.20222232v1.full-text)
+
+
+
+########################### start of QC of original plink files and trasfer to VCF files ###########################
+
+1. individual missingness < 10%
+
+a) combine 22 chromosome into one file
+input: WES original plink fils 
+tool: plink1.9
+output: one combined plink file
+code:
+
+/mnt/speliotes-lab/Software/PLINK/plink --bed /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/ukb23155_c1_b0_v1.bed --fam /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/ukb23155_c1_b0_v1_s200632.fam --bim /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/UKBexomeOQFE_chr1.bim --merge-list /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/filelist.txt --make-bed --out /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/UKB_WES_combined
+
+b) create exclusion list of individuals with filter: missingness < 10%
+input: one combined plink file
+output: a list of individuals that needs to be excluded
+tool: plink1.9
+code: 
+
+/mnt/speliotes-lab/Software/PLINK/plink --bfile /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/UKB_WES_combined --mind 0.1 --make-bed --out /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/UKB_WES_combined_Indiv0.1
+
+### step b) yields no individuals filtered out, so step c) is not necessary anymore. we can start with the original plink files for the filtering. 
+
+c) for each chromosome, apply filter of individual missingness
+input: WES original plink fils, output in b)
+output: filtered_1 22 plink files of each chromosome
+tool: plink1.9
+code: 
+
+for ((i=1;i<=22;i++))
+do
+  /mnt/speliotes-lab/Software/PLINK/plink --bed /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/ukb23155_c${i}_b0_v1.bed --fam /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/ukb23155_c${i}_b0_v1_s200632.fam --bim /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/UKBexomeOQFE_chr${i}.bim --remove /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/UKB_WES_combined_Indiv0.1.irem --make-bed --out /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/middle_steps/UKB_WES_filtered_1_chr${i} &
+done
+
+
+#### this part should be done after we determine which variants should be excluded by 3, since individual filtering is no longer needed.
+2. variant missingness < 10%, Hardy Weinberg Equilibrium p-value>10^-15
+input: filtered_1 22 plink files
+output: filtered_2 22 plink files 
+tool: plink1.9
+code:
+
+for ((i=1;i<=22;i++))
+do
+ /mnt/speliotes-lab/Software/PLINK/plink --bfile /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/middle_steps/UKB_WES_filtered_1_chr${i} --hwe 1e-15 --geno 0.1 --make-bed --out /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/middle_steps/UKB_WES_filtered_2_chr${i} &
+done
+
+
+3. minimum read coverage depth of 7 for SNPs and 10 for indels, at least one sample per site passed the allele balance threshold > 0.15 for SNPs and 0.20 for indels
+
+a) remove pVCF sites with FILTER non-pass tags and split each chromosome's pVCF files into SNPs and INDELs VCF files, filter based on corresponsive criterions, and create variant list for each pVCF files
+input: original pVCF files
+output:  977 SNP pVCF vlist + 977 INDEL VCF vlist
+tool: vcftools, GATK
+code:
+
+# On prod01 and 02, run the SNPs
+goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_1_filelist))
+# goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_2_filelist))
+
+len_goal_pheno=${#goal_pVCF_list[@]}
+batch_limit=25
+
+declare -i n_jobs=0
+
+for (( i=0; i<${len_goal_pheno}; i++ ))
+do
+ n_jobs=${n_jobs}+1
+ sh GAKT_clean_SNPs.sh ${goal_pVCF_list[i]} &
+ if (( ($n_jobs % $(($batch_limit))) == 0 )); then
+                echo "Currently started job: $n_jobs"
+        wait
+ fi
+done
+wait
+
+
+# On new server, run the INDELs
+goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_1_filelist))
+# goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_2_filelist))
+
+len_goal_pheno=${#goal_pVCF_list[@]}
+batch_limit=25
+
+declare -i n_jobs=0
+
+for (( i=0; i<${len_goal_pheno}; i++ ))
+do
+ n_jobs=${n_jobs}+1
+ sh GAKT_clean_INDELs.sh ${goal_pVCF_list[i]} &
+ if (( ($n_jobs % $(($batch_limit))) == 0 )); then
+                echo "Currently started job: $n_jobs"
+        wait
+ fi
+done
+wait
+
+
+# after the first run, some of the SNP files are not finished. we are creating unfinished file list here and rerun those
+
+### R
+library(stringr)
+
+filelist = readLines("download_full_filelist")
+snplog = system("wc -l ./middle_steps/ukb23156_*_SNPs_filter_3_4_GATK.log",intern=TRUE)
+snplog = str_split(snplog," +",simplify=TRUE)
+finished.log = snplog[snplog[,2]=="12",3]
+
+
+finished_files = str_replace(str_replace(finished.log,"^[[:print:]]+middle_steps/",""),"_SNPs[[:print:]]+$","")
+all_files = str_replace(str_replace(filelist,"^[[:print:]]+pVCF/",""),".vcf.gz","")
+
+unfinished_files = setdiff(all_files,finished_files)
+unfinished_file_paths = paste0("/mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/pVCF/",unfinished_files,".vcf.gz")
+
+write.table(unfinished_file_paths[1:98],"/mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_filelist_run1_unfinished_part1",quote=FALSE,row.names=FALSE,sep='\t',col.names=FALSE)
+write.table(unfinished_file_paths[99:197],"/mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_filelist_run1_unfinished_part2",quote=FALSE,row.names=FALSE,sep='\t',col.names=FALSE)
+
+### run the code for the unfinished files
+# On prod01 and 02, run the SNPs
+# goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_filelist_run1_unfinished_part1))
+goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_filelist_run1_unfinished_part2))
+
+len_goal_pheno=${#goal_pVCF_list[@]}
+batch_limit=20
+
+declare -i n_jobs=0
+
+for (( i=0; i<${len_goal_pheno}; i++ ))
+do
+ n_jobs=${n_jobs}+1
+ sh GAKT_clean_SNPs.sh ${goal_pVCF_list[i]} &
+ if (( ($n_jobs % $(($batch_limit))) == 0 )); then
+                echo "Currently started job: $n_jobs"
+        wait
+ fi
+done
+wait
+
+### the second bunch prod01 failed running. use prod02 for the residuals. 
+
+### R
+library(stringr)
+
+filelist = readLines("download_full_filelist")
+snplog = system("wc -l ./middle_steps/ukb23156_*_SNPs_filter_3_4_GATK.log",intern=TRUE)
+snplog = str_split(snplog," +",simplify=TRUE)
+finished.log = snplog[snplog[,2]=="12",3]
+
+
+finished_files = str_replace(str_replace(finished.log,"^[[:print:]]+middle_steps/",""),"_SNPs[[:print:]]+$","")
+all_files = str_replace(str_replace(filelist,"^[[:print:]]+pVCF/",""),".vcf.gz","")
+
+unfinished_files = setdiff(all_files,finished_files)
+unfinished_file_paths = paste0("/mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/pVCF/",unfinished_files,".vcf.gz")
+
+write.table(unfinished_file_paths,"/mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_filelist_run2_unfinished",quote=FALSE,row.names=FALSE,sep='\t',col.names=FALSE)
+
+
+### run the code for the unfinished files
+# On prod02
+goal_pVCF_list=($(cat /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/download_full_filelist_run2_unfinished))
+
+len_goal_pheno=${#goal_pVCF_list[@]}
+batch_limit=20
+
+declare -i n_jobs=0
+
+for (( i=0; i<${len_goal_pheno}; i++ ))
+do
+ n_jobs=${n_jobs}+1
+ sh GAKT_clean_SNPs.sh ${goal_pVCF_list[i]} &
+ if (( ($n_jobs % $(($batch_limit))) == 0 )); then
+                echo "Currently started job: $n_jobs"
+        wait
+ fi
+done
+wait
+
+
+
+
+
+b) combine INDEL and SNP vlists together and create SNPID list for each chromosome
+input: 977 SNP pVCF vlist + 977 INDEL VCF vlist
+output: combined vlist for each chromosome filtered by 3 & 4
+code: see clean_filtered_3_4_vlist.r
+
+c) use variant list from previous step and filter of variant missingness < 10% and Hardy Weinberg Equilibrium p-value>10^-15
+input: 22 chromosome plink files
+input: combined vlist for each chromosome filtered by 3 & 4
+output: filtered plink files
+tool: plink
+code:
+
+for ((i=1;i<=22;i++))
+do 
+/mnt/speliotes-lab/Software/PLINK/plink --bed /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/ukb23155_c${i}_b0_v1.bed --fam /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/ukb23155_c${i}_b0_v1_s200632.fam --bim /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26/UKBexomeOQFE_chr${i}.bim --extract /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/filtered_3_4/keep_vlist_plink_chr${i}.txt --hwe 10e-15 --geno 0.1 --mind 0.1 --make-bed --out /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/WES_filtered_final/UKBexomeOQFE_chr${i} &
+done
+
+
+
+
+
+########################### end of QC of original plink files and trasfer to VCF & BGEN files ###########################
+
+#### convert to BGEN file
+
+for ((i=1;i<=22;i++))
+do 
+/mnt/speliotes-lab/Software/PLINK/PLINK2/plink2 --bfile /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/WES_filtered_final/UKBexomeOQFE_chr${i}_QCed --export bgen-1.1 --out /mnt/speliotes-lab/Projects/UK_ATLAS/GENODATA/Exomechip/2020_10_26_bgen/QC/WES_filtered_final/UKBexomeOQFE_chr${i}_QCed_B &
+done
+
+
+for ((i=1;i<=22;i++))
+do 
+/mnt/speliotes-lab/Software/bgen/gavinband-bgen-798eca81c0fa/build/apps/bgenix -index -g UKBexomeOQFE_chr${i}_QCed_B.bgen &
+done
+
+
+
+
+
+########################### recreate the GRM files for SAIGE step 0 & 1 ##############################
+
+
+
+
+
+
+
+
