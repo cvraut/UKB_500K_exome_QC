@@ -35,7 +35,7 @@ $ ./run_all.sh
 
 This QC procedure is what [Speliotes Lab](spelioteslab.com/) uses.
 
-Steps are outlined below, but Software is provided as is.
+General steps are outlined above, but Software is provided as is.
 
 Feel free to raise issues, but this project will not be maintained regularly.
 

@@ -2,6 +2,18 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2022 07 27
+ - We don't have the 500K exome data
+ - We will not get the 500K exome data soon
+   - UK Biobank have changed their data access policies
+     - [July 22nd Data Access Policy](https://www.ukbiobank.ac.uk/media/najcnoaz/access_064-uk-biobank-exome-release-faq_v11-1_final-002.pdf)
+     - ![How do we access these files](./notes/20220727_notes_pic1.png)
+     - It will be very expensive to acquire the 500K data now:
+       - [Transactional Arrangements & Fees](https://www.ukbiobank.ac.uk/enable-your-research/costs/transitional-arrangements-and-faqs)
+     - ![Fee Access Structure](./notes/20220727_notes_pic2.png)
+     - I think we can get away with 1500 pounds as I can qualify as student researcher
+     - We need Tier 3 access as this is the one that has exome data
+
 ## 2022 07 26
  - started the github
  - began migrating some files from the depths of the drive
