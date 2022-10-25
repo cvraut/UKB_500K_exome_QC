@@ -2,6 +2,12 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2022 10 25
+- So we have the 500k exome data, but we do not know the extent of the QC procedures they applied to it
+  - We know that they followed the OQFE protocol
+  - after that we don't know if they did anything different
+
+
 ## 2022 07 27
  - We don't have the 500K exome data
  - We will not get the 500K exome data soon
@@ -13,6 +19,7 @@ Running list of all I have done & plan to do with this project
      - ![Fee Access Structure](./notes/20220727_notes_pic2.png)
      - I think we can get away with 1500 pounds as I can qualify as student researcher
      - We need Tier 3 access as this is the one that has exome data
+ - update: Liz knows about this & has assigned someone to get me the 500K data ASAP
 
 ## 2022 07 26
  - started the github
