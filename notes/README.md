@@ -6,6 +6,13 @@ Running list of all I have done & plan to do with this project
 - So we have the 500k exome data, but we do not know the extent of the QC procedures they applied to it
   - We know that they followed the OQFE protocol
   - after that we don't know if they did anything different
+- So I checked the missingness from the bgen variants, they did not run the QC procedure from the 2020 ukbb paper
+  - they include some variants which are missing from all individuals
+- Yanhua pointed me to a QC file which they recommend using.
+  - I downloaded it & it seems like they use a different format for the SNP id which is worrying
+  - yep just confirmed the 500k release uses a different format for the INDEL variants :/
+  - this means that the analysis I currently have running is prolly for naught
+- I looked at the file Yanhua sent & it's not good. Only 5 million of the 25 million exome variants are in that list which is way less than the 200k exome release
 
 
 ## 2022 07 27
