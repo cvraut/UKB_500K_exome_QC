@@ -27,7 +27,7 @@ There are 5 filters (each one is applied independently). For a (row, col) datum 
   1. compute HWE p-value for all variants
   2. keep variants with HWE p-value > 10e-15
 - Variant read depth (column filter)
-  1. calculate read depth for each variant
+  1. calculate minimum read depth for each variant
   2. determine whether a variant is a SNP or INDEL
   3. keep variants with sufficient read depth
      - \>= 7 (for SNPs)
@@ -40,12 +40,6 @@ There are 5 filters (each one is applied independently). For a (row, col) datum 
      - \>= 0.15 (for SNPs)
      - \>= 0.20 (for indels)    
 
-
-
----
-## Note
-
-This QC procedure is what [Speliotes Lab](spelioteslab.com/) uses.
 
 General steps are outlined above, but Software is provided as is.
 
