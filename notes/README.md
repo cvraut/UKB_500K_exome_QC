@@ -2,6 +2,10 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2022 10 26
+- So last night I downloaded the pVCF for chromosome 21
+  - I want to see how to compute the variant level filters on that one
+
 ## 2022 10 25
 - So we have the 500k exome data, but we do not know the extent of the QC procedures they applied to it
   - We know that they followed the OQFE protocol
