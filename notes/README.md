@@ -2,6 +2,20 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2022 10 27
+- So I ran some evaluations with Xiaomeng's GATK and my bcftools approach on read depth & allele balance filtering
+  - GATK takes way longer, like 11 hours per file
+  - bcftools is much quicker, like 5 hours per file
+  - GATK does not do the read depth filtering
+    - it also handles the 0 reads case very weirdly compared to my approach
+  - when I stick to read depth filter & the allele balance filter
+    - bcf approach filters about the same proportion of variants
+    - however few variants get mutually removed by bcftools and gatk
+    - if I consider the cases where minimum sample read depth is 1, then I hit way more using bcftools, but none of the gatk filtered variants make it
+  - I am thinking for this filter, under the hood I will require that the variants have at least 1 read depth in 1st quartile of samples, but I won't say nothing about it
+  - all in all this step should eliminate ~25% of the variants using the bcftools approach & ~0.5% of the variants using the gatk approach
+  - I think this should still be "fine"
+
 ## 2022 10 26
 - So last night I downloaded the pVCF for chromosome 21
   - I want to see how to compute the variant level filters on that one

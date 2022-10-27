@@ -50,7 +50,7 @@ if __name__ == "__main__":
             ab = ab_temp
           if ab >= 0.2:
             break
-      print(snp_id,np.mean(dp),min(dp),ab,sep="\t")
+      print(snp_id,np.mean(dp),np.percentile(dp,25),min(dp),ab,sep="\t")
     # if lim == 0:
     #   break
     # else:
