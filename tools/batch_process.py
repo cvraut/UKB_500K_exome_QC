@@ -1,10 +1,15 @@
+# this script runs through the vcf file read depth and allele depth data to 
+# compute read depth and allele balance summaries for each variant in a pVCF file
+# how to use:
+# time bcftools query -f '%CHROM\t%POS\t%ID\t[ %DP]\t[ %AD]\n' ${DATA_IN}ukb23157_c21_b10_v1.vcf.gz > test.output3
+
 import sys
 import numpy as np
 
 N_ind = 469835
 offset = 3
 
-# time bcftools query -f '%CHROM\t%POS\t%ID\t%INFO\t[ %DP]\t[ %AD]\n' ${DATA_IN}ukb23157_c21_b10_v1.vcf.gz > test.output3
+
 
 if __name__ == "__main__":
   # lim = 360
