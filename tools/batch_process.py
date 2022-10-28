@@ -36,7 +36,7 @@ if __name__ == "__main__":
         if min(ab) >= 0.2:
           break
       for snp,abl in zip(snp_id,ab):
-        print(snp,np.mean(dp),min(dp),abl,sep="\t")
+        print(snp,np.mean(dp),np.percentile(dp,25),min(dp),abl,sep="\t")
     else:
       ab = 0
       for ra in line[N_ind+offset:2*N_ind+offset]:
