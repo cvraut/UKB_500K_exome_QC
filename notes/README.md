@@ -5,6 +5,8 @@ Running list of all I have done & plan to do with this project
 ## 2022 11 16
 - trying the AD & AB process scripts on RAP
   - I selected "mem2_ssd1_v2_x96" to run until midnight costing 32 pounds
+  - I have intelligently decided to do the 1st 96 batch files from chromosome 1 as the rap test
+    - knowing there was a 6-7 file overlap to make sure results were identical across platforms
   - so the initial runs consisted of many steps
     - all documented in `running_on_rap_notes.txt`
     - 10 pVCF files from chr1 --> first 360 variants
@@ -15,6 +17,8 @@ Running list of all I have done & plan to do with this project
       - download of tar_gzipped results --> 656KB happened instantly
     - 96 pVCF files from chr1 --> all variants
       - max RAM use < 50GB
+      - started at 11:05 AM
+      - estimating it should take between 8-18 hours
 
 ## 2022 10 27
 - So I ran some evaluations with Xiaomeng's GATK and my bcftools approach on read depth & allele balance filtering
