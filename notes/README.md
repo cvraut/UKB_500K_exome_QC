@@ -16,9 +16,10 @@ Running list of all I have done & plan to do with this project
       - max RAM use < 10GB
       - download of tar_gzipped results --> 656KB happened instantly
     - 96 pVCF files from chr1 --> all variants
-      - max RAM use < 50GB
+      - max RAM use < 205GB
       - started at 11:05 AM
       - estimating it should take between 8-18 hours
+      - some of the results have started to come in & it seems like the RAP is only 10% slower than our servers
 
 ## 2022 10 27
 - So I ran some evaluations with Xiaomeng's GATK and my bcftools approach on read depth & allele balance filtering
