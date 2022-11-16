@@ -2,6 +2,20 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2022 11 16
+- trying the AD & AB process scripts on RAP
+  - I selected "mem2_ssd1_v2_x96" to run until midnight costing 32 pounds
+  - so the initial runs consisted of many steps
+    - all documented in `running_on_rap_notes.txt`
+    - 10 pVCF files from chr1 --> first 360 variants
+      - took about 5 minutes
+    - 96 pVCF files from chr1 --> first 360 variants
+      - took about 13 minutes
+      - max RAM use < 10GB
+      - download of tar_gzipped results --> 656KB happened instantly
+    - 96 pVCF files from chr1 --> all variants
+      - max RAM use < 50GB
+
 ## 2022 10 27
 - So I ran some evaluations with Xiaomeng's GATK and my bcftools approach on read depth & allele balance filtering
   - GATK takes way longer, like 11 hours per file

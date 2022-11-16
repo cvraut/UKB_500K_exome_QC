@@ -1,0 +1,37 @@
+# so we need to download a couple things at first:
+- bcftools:
+conda install -c bioconda bcftools
+- numpy
+conda install -c conda-forge numpy
+- htop
+conda install -c conda-forge htop
+- parallel
+conda install -c conda-forge parallel
+
+Then we need to copy over a couple files:
+- batch_process_parallel.sh
+- batch_process.sh
+- batch_process.py
+
+I needed to write a custom script to build the input files for the parallel command
+vcf_files = "pVCF/ukb23157_c1_b{}_v1.vcf.gz"
+upp_lim = 96
+with open("vcf.list","w+") as f:
+    for i in range(upp_lim):
+        f.write(vcf_files.format(i)+"\n")
+with open("out.list","w+") as f:
+    for i in range(upp_lim):
+        f.write("output/ukb23157_c1_b{}_v1.ouput\n".format(i))
+
+I needed to create a softlink from the bulk file location to the working directory since my bash scripts can't handle spaces in the file paths
+ln -s /mnt/project/Bulk/Exome\ sequences/Population\ level\ exome\ OQFE\ variants\,\ pVCF\ format\ -\ final\ release/ pVCF
+
+When a batch was done I needed to tar the output:
+tar -cvzf output_test_run.tar.gz output/
+
+I should probably put this stuff all in a little startup/setup script & test its deployment on smaller instances to make sure the setup can work
+  - wget from the git repo to download & unzip a little setup script file
+
+Also the output directories should be written to in batches ... we can tell when a batch is done by looking at the output of the parallel_script
+  - write python code to parse ouput script
+  - whenever a batch is done it should tar it immeadiately
