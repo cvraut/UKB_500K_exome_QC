@@ -19,7 +19,10 @@ Running list of all I have done & plan to do with this project
       - max RAM use < 205GB
       - started at 11:05 AM
       - estimating it should take between 8-18 hours
-      - some of the results have started to come in & it seems like the RAP is only 10% slower than our servers
+      - took ~750 min to analyze just under a tenth of the pVCF files
+      - resulting compressed results were ~42 MB
+  - total cost was 36.6 pounds
+      
 
 ## 2022 10 27
 - So I ran some evaluations with Xiaomeng's GATK and my bcftools approach on read depth & allele balance filtering
