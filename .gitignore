@@ -1,2 +1,14 @@
+# outputs
+outputs/
+
+# misc data
+code/chr21*
+code/gatk_*
+code/test.output*
+code/bcf_processed.txt
+
+# output files
+**.out
+
 # notebook stuff
 **.ipynb_checkpoints/
