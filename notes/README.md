@@ -2,6 +2,11 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2022 12 05
+- starting up this repo again
+- want to understand how a lower quartile read depth will affect the results
+
+
 ## 2022 11 16
 - trying the AD & AB process scripts on RAP
   - I selected "mem2_ssd1_v2_x96" to run until midnight costing 32 pounds
@@ -22,7 +27,8 @@ Running list of all I have done & plan to do with this project
       - took ~750 min to analyze just under a tenth of the pVCF files
       - resulting compressed results were ~42 MB
   - total cost was 36.6 pounds
-      
+    - needed to increase duration to ensure all pVCF's finished
+
 
 ## 2022 10 27
 - So I ran some evaluations with Xiaomeng's GATK and my bcftools approach on read depth & allele balance filtering
