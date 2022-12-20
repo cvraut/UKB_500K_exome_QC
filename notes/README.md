@@ -6,7 +6,6 @@ Running list of all I have done & plan to do with this project
 - starting up this repo again
 - want to understand how a lower quartile read depth will affect the results
 
-
 ## 2022 11 16
 - trying the AD & AB process scripts on RAP
   - I selected "mem2_ssd1_v2_x96" to run until midnight costing 32 pounds
