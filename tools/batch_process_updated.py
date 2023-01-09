@@ -1,10 +1,15 @@
+# this script runs through the vcf file read depth and allele depth data to 
+# compute read depth and allele balance summaries for each variant in a pVCF file
+# how to use:
+# time bcftools query -f '%CHROM\t%POS\t%ID\t[ %DP]\t[ %AD]\n' ${DATA_IN}ukb23157_c21_b10_v1.vcf.gz > test.output3
+
 import sys
 import numpy as np
 
 N_ind = 469835
 offset = 3
 
-# time bcftools query -f '%CHROM\t%POS\t%ID\t%INFO\t[ %DP]\t[ %AD]\n' ${DATA_IN}ukb23157_c21_b10_v1.vcf.gz > test.output3
+target_dp_prop = 0.9 # calculate the read depth for the 10% percentile (90% have more) accounting for missing = 0
 
 if __name__ == "__main__":
   lim = 360
@@ -13,7 +18,7 @@ if __name__ == "__main__":
     line = line.strip().split()
     snp_id = line[2]
     # dot means that value is missing
-    dp = np.asarray([c for c in line[offset:N_ind+offset] if c != "."]).astype('int')
+    dp = np.asarray([c if c != "." else 0 for c in line[offset:N_ind+offset] ]).astype('int')
     if ";" in snp_id:
       snp_id = snp_id.split(";")
       ab = [0]*len(snp_id)
@@ -31,7 +36,7 @@ if __name__ == "__main__":
         if min(ab) >= 0.2:
           break
       for snp,abl in zip(snp_id,ab):
-        print(snp,np.mean(dp),np.percentile(dp,25),min(dp),abl,sep="\t")
+        print(snp,np.percentile(dp,int(100*(1-target_dp_prop))),abl,sep="\t")
     else:
       ab = 0
       for ra in line[N_ind+offset:2*N_ind+offset]:
@@ -45,7 +50,7 @@ if __name__ == "__main__":
             ab = ab_temp
           if ab >= 0.2:
             break
-      print(snp_id,np.mean(dp),np.percentile(dp,25),min(dp),ab,sep="\t")
+      print(snp,np.percentile(dp,int(100*(1-target_dp_prop))),ab,sep="\t")
     if lim == 0:
       break
     else:

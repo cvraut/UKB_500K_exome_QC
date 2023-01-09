@@ -2,7 +2,12 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 09
+- started check on 90% cutoffs
 
+## 2023 01 02
+- servers were rebooted
+  - ran some checks to verify
 
 ## 2022 12 05
 - starting up this repo again
