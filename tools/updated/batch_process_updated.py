@@ -36,6 +36,7 @@ if __name__ == "__main__":
         if min(ab) >= 0.2:
           break
       for snp,abl in zip(snp_id,ab):
+        #print(snp,np.mean(dp),abl,sep="\t")
         print(snp,np.percentile(dp,int(100*(1-target_dp_prop))),abl,sep="\t")
     else:
       ab = 0
@@ -50,7 +51,8 @@ if __name__ == "__main__":
             ab = ab_temp
           if ab >= 0.2:
             break
-      print(snp,np.percentile(dp,int(100*(1-target_dp_prop))),ab,sep="\t")
+      #print(snp_id,np.mean(dp),abl,sep="\t")
+      print(snp_id,np.percentile(dp,int(100*(1-target_dp_prop))),ab,sep="\t")
     if lim == 0:
       break
     else:

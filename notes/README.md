@@ -4,6 +4,8 @@ Running list of all I have done & plan to do with this project
 
 ## 2023 01 09
 - started check on 90% cutoffs
+- current updated version of code takes:
+  - 4m11.777s to finish 360 snps
 
 ## 2023 01 02
 - servers were rebooted
