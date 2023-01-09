@@ -27,12 +27,8 @@ if __name__ == "__main__":
     target_prop = int(100*(1-target_prop))
     num_low_depth = N_ind - len(dp)
     depth = 0
-    for d in dp:
-      if d < LOW_DEPTH:
-        num_low_depth+=1
-      if num_low_depth > ind_for_early_term:
-        depth = 0
-        break
+    if np.sum(dp<7)+num_low_depth >= ind_for_early_term:
+      pass
     else:
       depth = np.percentile(dp,target_prop)
     if depth == 0:
