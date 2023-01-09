@@ -9,9 +9,11 @@ import numpy as np
 N_ind = 469835
 offset = 3
 
-target_dp_prop = 0.9 # calculate the read depth for the 10% percentile (90% have more) accounting for missing = 0
+LOW_DEPTH = 7 # this is low depth for a snp
 
+target_dp_prop = 0.9 # calculate the read depth for the 10% percentile (90% have more) accounting for missing = 0
 ind_for_90pct = N_ind*target_dp_prop
+ind_for_early_term = int(N_ind*(1-target_dp_prop))
 
 if __name__ == "__main__":
   lim = 360
@@ -23,7 +25,17 @@ if __name__ == "__main__":
     dp = np.asarray([c for c in line[offset:N_ind+offset] if c != "."]).astype('int')
     target_prop = (ind_for_90pct+(N_ind-len(dp)))/N_ind
     target_prop = int(100*(1-target_prop))
-    if target_prop < 0:
+    num_low_depth = N_ind - len(dp)
+    depth = 0
+    for d in dp:
+      if d < LOW_DEPTH:
+        num_low_depth+=1
+      if num_low_depth > ind_for_early_term:
+        depth = 0
+        break
+    else:
+      depth = np.percentile(dp,target_prop)
+    if depth == 0:
       print(snp_id,0.0,0.0)
     elif ";" in snp_id:
       snp_id = snp_id.split(";")
@@ -43,7 +55,7 @@ if __name__ == "__main__":
           break
       for snp,abl in zip(snp_id,ab):
         #print(snp,np.mean(dp),abl,sep="\t")
-        print(snp,np.percentile(dp,target_prop),abl,sep="\t")
+        print(snp,depth,abl,sep="\t")
     else:
       ab = 0
       for ra in line[N_ind+offset:2*N_ind+offset]:
@@ -58,7 +70,7 @@ if __name__ == "__main__":
           if ab >= 0.2:
             break
       #print(snp_id,np.mean(dp),abl,sep="\t")
-      print(snp_id,np.percentile(dp,target_prop),ab,sep="\t")
+      print(snp_id,depth,ab,sep="\t")
     if lim == 0:
       break
     else:
