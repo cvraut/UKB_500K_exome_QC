@@ -11,6 +11,8 @@ offset = 3
 
 target_dp_prop = 0.9 # calculate the read depth for the 10% percentile (90% have more) accounting for missing = 0
 
+ind_for_90pct = N_ind*target_dp_prop
+
 if __name__ == "__main__":
   lim = 360
 
@@ -18,7 +20,10 @@ if __name__ == "__main__":
     line = line.strip().split()
     snp_id = line[2]
     # dot means that value is missing
-    dp = np.asarray([c if c != "." else 0 for c in line[offset:N_ind+offset] ]).astype('int')
+    dp = np.asarray([c for c in line[offset:N_ind+offset] if c != "."]).astype('int')
+    target_prop = (ind_for_90pct+(N_ind-len(dp)))/N_ind
+    if target_prop > 1:
+      target_prop = 1
     if ";" in snp_id:
       snp_id = snp_id.split(";")
       ab = [0]*len(snp_id)
@@ -37,7 +42,7 @@ if __name__ == "__main__":
           break
       for snp,abl in zip(snp_id,ab):
         #print(snp,np.mean(dp),abl,sep="\t")
-        print(snp,np.percentile(dp,int(100*(1-target_dp_prop))),abl,sep="\t")
+        print(snp,np.percentile(dp,int(100*(1-target_prop))),abl,sep="\t")
     else:
       ab = 0
       for ra in line[N_ind+offset:2*N_ind+offset]:
@@ -52,7 +57,7 @@ if __name__ == "__main__":
           if ab >= 0.2:
             break
       #print(snp_id,np.mean(dp),abl,sep="\t")
-      print(snp_id,np.percentile(dp,int(100*(1-target_dp_prop))),ab,sep="\t")
+      print(snp_id,np.percentile(dp,int(100*(1-target_prop))),ab,sep="\t")
     if lim == 0:
       break
     else:
