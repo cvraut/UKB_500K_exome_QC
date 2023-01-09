@@ -23,8 +23,9 @@ if __name__ == "__main__":
     dp = np.asarray([c for c in line[offset:N_ind+offset] if c != "."]).astype('int')
     target_prop = (ind_for_90pct+(N_ind-len(dp)))/N_ind
     if target_prop > 1:
-      target_prop = 1
-    if ";" in snp_id:
+      #target_prop = 1
+      print(snp_id,0.0,0.0)
+    elif ";" in snp_id:
       snp_id = snp_id.split(";")
       ab = [0]*len(snp_id)
       for ra in line[N_ind+offset:2*N_ind+offset]:
