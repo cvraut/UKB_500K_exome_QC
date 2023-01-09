@@ -9,6 +9,7 @@ Running list of all I have done & plan to do with this project
   - 4m9.669s  to finish 360 snps (v1_2)
     - no difference ... yay!
   - 4m14.174s to finish 360 snps (v1_3)
+  - 4m12.146s to finish 360 snps (v1_4)
 
 ## 2023 01 02
 - servers were rebooted
