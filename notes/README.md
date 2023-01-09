@@ -12,7 +12,7 @@ Running list of all I have done & plan to do with this project
   - 4m12.146s to finish 360 snps (v1_4)
     - this should be the fastest & handle the high missing cases super fast too
     - only next step would be early term on read depth ... count the number of rd < 10 & break early if it exceeds 10% of the data
-  
+  - 5m21.648s to finish 360 snps (v1_5)
 
 ## 2023 01 02
 - servers were rebooted
