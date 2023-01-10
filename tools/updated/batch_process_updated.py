@@ -16,7 +16,7 @@ ind_for_90pct = N_ind*target_dp_prop
 ind_for_early_term = int(N_ind*(1-target_dp_prop))
 
 if __name__ == "__main__":
-  lim = 360
+  #lim = 360
 
   for line in sys.stdin:
     line = line.strip().split()
@@ -67,7 +67,7 @@ if __name__ == "__main__":
             break
       #print(snp_id,np.mean(dp),abl,sep="\t")
       print(snp_id,depth,ab,sep="\t")
-    if lim == 0:
-      break
-    else:
-      lim-=1
+    # if lim == 0:
+    #   break
+    # else:
+    #   lim-=1

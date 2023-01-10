@@ -15,6 +15,7 @@ Running list of all I have done & plan to do with this project
   - 5m21.648s to finish 360 snps (v1_5)
   - 4m13.523s to finish 360 snps (v1_6)
     - this time I vectorized instead of early term
+- started the runs on the whole data using the 90% cutoff instead 
 
 ## 2023 01 02
 - servers were rebooted
