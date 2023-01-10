@@ -2,6 +2,16 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 10
+- so updated code with 90% cutoff ran in:
+  ```
+  real    259m39.659s 
+  user    3778m23.814s
+  sys     95m1.616s 
+  ```
+  - so that's a third of the time ... massive speedup!
+  - but now to check whether this speedup makes sense ... 
+
 ## 2023 01 09
 - started check on 90% cutoffs
 - current updated version of code takes:
@@ -15,7 +25,7 @@ Running list of all I have done & plan to do with this project
   - 5m21.648s to finish 360 snps (v1_5)
   - 4m13.523s to finish 360 snps (v1_6)
     - this time I vectorized instead of early term
-- started the runs on the whole data using the 90% cutoff instead 
+- started the runs on the whole data using the 90% cutoff instead
 
 ## 2023 01 02
 - servers were rebooted
