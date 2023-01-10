@@ -2,6 +2,13 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 11
+- so the 90 pct cutoff I had seems like it works
+  - doesn't eliminate too many variants
+  - fast
+  - lightweight
+- now we just need to come up with a system to batch the results on the RAP as they come in ... like a 1 line bashscript to figure it out would be pretty nice
+
 ## 2023 01 10
 - so updated code with 90% cutoff ran in:
   ```
