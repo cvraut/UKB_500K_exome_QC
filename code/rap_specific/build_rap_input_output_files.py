@@ -39,7 +39,7 @@ def build_output_list():
     for i,fname in enumerate(get_missing_vcf_files()):
       if i%DOWNLOAD_BATCH_SIZE == 0:
         group+=1
-      f.write("/opt/notebooks/output/group_{}/{}\n".format(group,fname))
+      f.write("/opt/notebooks/output/group_{}/{}_processed.txt\n".format(group,fname))
 
 if __name__ == "__main__":
   print(len(list(get_all_vcf_index_files())))

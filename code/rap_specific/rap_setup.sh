@@ -15,5 +15,8 @@ mkdir -p output
 for ((i=1;i<=10;i++))
 do
   cd /opt/notebooks/output
-  mkdir -p group${i}
+  mkdir -p group_${i}
 done
+
+# go back to home base
+cd /opt/notebooks/
