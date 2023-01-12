@@ -5,6 +5,8 @@ Some scripts to run QC on the UK Biobank 500k exome data
 
 ## Environment & requirements
  - This was developed & tested on **RHEL 7**
+   - This code was designed to run on UKBB RAP
+     - Read Depth & Allele Balance filters were run on RAP
    - YMMV
  - Have either **conda or mamba >= 4.12**
 
@@ -17,7 +19,7 @@ $ ./run_all.sh
 ```
 
 ## Steps
-There are 5 filters (each one is applied independently). For a (row, col) datum to be retained it must pass all filters for its row & col
+There are 5 filters (each one is applied independently). For a (individual, variant) datum to be retained it must pass all filters for its individual & variant
 - Individual missingness (row filter)
   1. combine 22 chromosomes into 1 file
   2. each individual we keep must be missing less than 10% of variants

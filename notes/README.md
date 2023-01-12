@@ -2,6 +2,9 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 12
+- so I backed up the repo to the depreciated folder, will pursue heavy refactoring as I figure out the policy for a clean RAP install and proceed with it
+
 ## 2023 01 11
 - so the 90 pct cutoff I had seems like it works
   - doesn't eliminate too many variants
