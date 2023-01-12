@@ -1,5 +1,6 @@
 # data
 *.csv
+data_out
 
 # outputs
 outputs/
