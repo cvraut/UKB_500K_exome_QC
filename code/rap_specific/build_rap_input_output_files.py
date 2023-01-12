@@ -28,7 +28,7 @@ def get_missing_vcf_files():
       yield vcf_file
 
 def build_input_list():
-  vcf_files = "pVCF/{}"
+  vcf_files = "/opt/notebooks/pVCF/{}"
   with open("vcf.list","w+") as f:
     for fname in get_missing_vcf_files():
       f.write(vcf_files.format(fname)+"\n")
@@ -39,7 +39,7 @@ def build_output_list():
     for i,fname in enumerate(get_missing_vcf_files()):
       if i%DOWNLOAD_BATCH_SIZE == 0:
         group+=1
-      f.write("output/group_{}/{}\n".format(group,fname))
+      f.write("/opt/notebooks/output/group_{}/{}\n".format(group,fname))
 
 if __name__ == "__main__":
   print(len(list(get_all_vcf_index_files())))
