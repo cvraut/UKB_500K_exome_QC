@@ -23,6 +23,8 @@ if __name__ == "__main__":
     snp_id = line[2]
     # dot means that value is missing
     dp = np.asarray([c for c in line[offset:N_ind+offset] if c != "."]).astype('int')
+
+    # early term optimization for read depths
     target_prop = (ind_for_90pct+(N_ind-len(dp)))/N_ind
     target_prop = int(100*(1-target_prop))
     num_low_depth = N_ind - len(dp)
@@ -31,9 +33,10 @@ if __name__ == "__main__":
       pass
     else:
       depth = np.percentile(dp,target_prop)
+    
     if depth == 0:
       print(snp_id,0.0,0.0)
-    elif ";" in snp_id:
+    elif ";" in snp_id: # multi-allelic variants: strat = split them up
       snp_id = snp_id.split(";")
       ab = [0]*len(snp_id)
       for ra in line[N_ind+offset:2*N_ind+offset]:
