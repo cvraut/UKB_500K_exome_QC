@@ -5,6 +5,10 @@ Running list of all I have done & plan to do with this project
 ## 2023 01 13
 - so rap script is still running
 - gonna create a notebook to assess the output to see if certain groups have finished
+  - so group 1 is finished
+  - it took 17 hours for group 1 to finish ... this might be close since we currently 10 british pounds over-budget
+    - the rap seems to be running far slower than normal :/
+  - checked the group 1 results ... looks like this filter keeps about 88% of the variants, so we should have about 23_000_000 variants at the end of the procedure
 
 ## 2023 01 12
 - so I backed up the repo to the depreciated folder, will pursue heavy refactoring as I figure out the policy for a clean RAP install and proceed with it
