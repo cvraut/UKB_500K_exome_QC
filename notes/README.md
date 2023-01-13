@@ -2,6 +2,10 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 13
+- so rap script is still running
+- gonna create a notebook to assess the output to see if certain groups have finished
+
 ## 2023 01 12
 - so I backed up the repo to the depreciated folder, will pursue heavy refactoring as I figure out the policy for a clean RAP install and proceed with it
 - lots of cleanup, but I think I am ready for the big run
