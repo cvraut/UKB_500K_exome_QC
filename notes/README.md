@@ -8,7 +8,7 @@ Running list of all I have done & plan to do with this project
 - gonna start it today & will update the notes with the progress
 - put it on the same type of instance (estimated cost is 200 pounds)
   - start time: 2023-01-12 5:15pm ET
-   
+  - pray for my sanity until this job gets finished 🙏
 
 ## 2023 01 11
 - so the 90 pct cutoff I had seems like it works
