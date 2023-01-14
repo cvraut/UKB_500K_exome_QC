@@ -2,6 +2,11 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 14
+- so group 2 & 3 are finished & results have been downloaded
+- it seems like the analysis is speeding up for some reason, but I should need 94 more hours to finish at this rate
+
+
 ## 2023 01 13
 - so rap script is still running
 - gonna create a notebook to assess the output to see if certain groups have finished
