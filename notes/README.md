@@ -5,7 +5,8 @@ Running list of all I have done & plan to do with this project
 ## 2023 01 15
 - so group 4 & 5 are finished
   - We halfway there lads!
-
+- processing of group 4 & 5 still looks good
+  - still at 88% variant retention 👍
 
 ## 2023 01 14
 - so group 2 & 3 are finished & results have been downloaded
