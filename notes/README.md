@@ -13,7 +13,14 @@ Running list of all I have done & plan to do with this project
 - realized that I added `plink1.9` to conda env instead of `plink2`
   - installed `plink2`
   - did not uninstall `plink1.9` from env (should be in req, but needs to be removed)
-  
+- missingness
+  - generating allele counts took about an hour:
+    ```
+    real    54m26.458s
+    user    1471m38.440s
+    sys     11m6.296s
+    ```
+  - need to rename the files but ugh ...
 
 ## 2023 01 15
 - so group 4 & 5 are finished
