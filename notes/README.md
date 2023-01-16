@@ -21,6 +21,19 @@ Running list of all I have done & plan to do with this project
     sys     11m6.296s
     ```
   - need to rename the files but ugh ...
+    - `find . -depth -name "**15mill_*" -exec sh -c 'f="{}"; mv -- "$f" "${f/15mill_/}"' \;`
+      - `find` gets all the files that match pattern
+      - `$f` is the filename as a variable
+      - `/` on strings performs a replacement `variable/orig/new`
+- started the hwe runs as well
+- assess the kept variants and failure levels for missingness and hwe
+  - hwe was much faster:
+    ```
+    real    38m51.822s  
+    user    1385m36.783s
+    sys     9m29.483s 
+    ```
+  - still need to assess the hwe results
 
 ## 2023 01 15
 - so group 4 & 5 are finished
