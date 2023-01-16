@@ -2,6 +2,10 @@
 
 Running list of all I have done & plan to do with this project
 
+## 2023 01 16
+- So Freeze 4 is at 89 hours of running
+  - groups 6 & 7 are still done & avg file handle time still decreasing 👍
+
 ## 2023 01 15
 - so group 4 & 5 are finished
   - We halfway there lads!
