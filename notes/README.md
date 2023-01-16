@@ -6,6 +6,14 @@ Running list of all I have done & plan to do with this project
 - So Freeze 4 is at 89 hours of running
   - groups 6 & 7 are still done & avg file handle time still decreasing 👍
   - still at 88% variant retention ... nice
+- started the other 3 filters:
+  - variant missing
+  - individual missing
+  - HWE
+- realized that I added `plink1.9` to conda env instead of `plink2`
+  - installed `plink2`
+  - did not uninstall `plink1.9` from env (should be in req, but needs to be removed)
+  
 
 ## 2023 01 15
 - so group 4 & 5 are finished
