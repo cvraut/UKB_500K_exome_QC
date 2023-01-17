@@ -27,7 +27,7 @@ There are 5 filters (each one is applied independently). For a (individual, vari
   1. keep variants missing from less than 10% of people
 - Variant HWE (column filter)
   1. compute HWE p-value for all variants
-  2. keep variants with HWE p-value > 10e-15
+  2. keep variants with HWE p-value > 1e-15
 - Variant read depth (column filter)
   1. calculate minimum read depth for each variant
   2. determine whether a variant is a SNP or INDEL
