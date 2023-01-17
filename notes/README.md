@@ -5,7 +5,6 @@ Running list of all I have done & plan to do with this project
 ## 2023 01 17
 - so writing this note at 114 hours of running:
   - 10 files remain to be processed & should finish in the next hour or so ...
-
 - finally finished:
   - 2023-01-17 1:00pm ET (115 hours & 49 minutes)
     ```
@@ -14,6 +13,11 @@ Running list of all I have done & plan to do with this project
     sys     13882m35.419s
     ```
   - final cost: `£314.7173`
+  - note how each freeze avg file process time went down 🤔
+    - don't know why but it's weird ...
+- finally ran all QC filters on UKBB 500K exome
+  - started with 26,388,327 variants
+  - ended with 22,946,846 variants (86.9% retention)
 
 ## 2023 01 16
 - So Freeze 4 is at 89 hours of running
