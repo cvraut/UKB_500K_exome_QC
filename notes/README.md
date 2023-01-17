@@ -6,6 +6,15 @@ Running list of all I have done & plan to do with this project
 - so writing this note at 114 hours of running:
   - 10 files remain to be processed & should finish in the next hour or so ...
 
+- finally finished:
+  - 2023-01-17 1:00pm ET (115 hours & 49 minutes)
+    ```
+    real    6933m56.247s
+    user    445236m10.469s
+    sys     13882m35.419s
+    ```
+  - final cost: `£314.7173`
+
 ## 2023 01 16
 - So Freeze 4 is at 89 hours of running
   - groups 6 & 7 are still done & avg file handle time still decreasing 👍
