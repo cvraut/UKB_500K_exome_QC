@@ -18,6 +18,14 @@ Running list of all I have done & plan to do with this project
 - finally ran all QC filters on UKBB 500K exome
   - started with 26,388,327 variants
   - ended with 22,946,846 variants (86.9% retention)
+- filtered the bgen into its final PLINK set:
+  ```
+  real    152m37.568s 
+  user    1401m35.473s
+  sys     47m11.619s
+  ```
+  - checked with wc: `wc -l chr*/ukbb_500k_exome_final_qced_hq_chr*.bim`
+    - `22946846 total`
 
 ## 2023 01 16
 - So Freeze 4 is at 89 hours of running
