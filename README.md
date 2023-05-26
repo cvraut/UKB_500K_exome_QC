@@ -42,6 +42,8 @@ There are 5 filters (each one is applied independently). For a (individual, vari
      - \>= 0.15 (for SNPs)
      - \>= 0.20 (for indels)    
 
+These steps are derived from the following publication:
+> Szustakowski, J.D., Balasubramanian, S., Kvikstad, E. et al. Advancing human genetics research and drug discovery through exome sequencing of the UK Biobank. Nat Genet 53, 942–948 (2021). [https://doi.org/10.1038/s41588-021-00885-0](https://doi.org/10.1038/s41588-021-00885-0)
 
 General steps are outlined above, but Software is provided as is.
 
